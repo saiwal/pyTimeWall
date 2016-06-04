@@ -18,7 +18,7 @@ walls = [
 	Copy the URL and paste
 	Below is my example
 '''
-url = "http://www.timeanddate.com/astronomy/usa/greensboro"
+url = "https://www.timeanddate.com/astronomy/india/kanpur"
 
 '''-----------------------------------------------------------------------
 				End Configuration
@@ -46,15 +46,15 @@ times = [] #initiate a list to put the time into
 for row in rows:
 	data = row.get_text()
 	data = data.encode("utf-8")
-	data = data[:8]	#this just strips out the first chunck since that's all we need
+	data = data[:5]	#this just strips out the first chunck since that's all we need
 	times.append(data.rstrip(' '))
 
 #TESTING
-#print times
+print times
 
 new_times = []
 for time_format in times:
-	newTime = time.strftime("%H:%M", time.strptime(time_format, "%I:%M %p"))
+	newTime = time.strftime("%H:%M", time.strptime(time_format, "%H.%M"))
 	new_times.append(newTime)
 #TESTING
 #print new_times
@@ -68,11 +68,11 @@ my_time = time.strftime("%H:%M")
 
 for k in range(8,0,-1):
 	if my_time >= new_times[k]:
-		#print "Time stops here : %s"%new_times[k]
-		#print "The wall would be : %s"%walls[k]
+		print "Time stops here : %s"%new_times[k]
+		print "The wall would be : %s"%walls[k]
 		#TESTING
-		#print "Setting the wallpaper to : %s"%current_path + walls[k]
-		os.system('xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s %s%s'%(current_path,walls[k]))
-		os.system('xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor1/image-path -s %s%s'%(current_path,walls[k]))
+		print "Setting the wallpaper to : %s"%current_path + walls[k]
+		os.system('xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitorLVDS1/workspace0/last-image -s %s%s'%(current_path,walls[k]))
+		os.system('xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitorVGA1/workspace0/last-image -s %s%s'%(current_path,walls[k]))
 		break
 
